@@ -26,10 +26,20 @@ deck = FrenchDeck()
 print(len(deck))
 print(deck[0])
 print(deck[-1])
-print('='*50)
 print(choice(deck))
-print(choice(deck))
-print(choice(deck))
-print('='*50)
-print(deck[:3])
 print(deck[12::13])
+
+for card in deck:
+    print(card)
+
+print(Card('J', 'spades') in deck)
+
+suit_values = dict(spades=3, hearts=2, diamonds=1, club=0)
+
+
+def spades_high(card):
+    rank_value = FrenchDeck.ranks.index(card.rank)
+    return rank_value * len(suit_values) + suit_values[card.suit]
+
+
+print("\n".join(str(card) for card in sorted(deck, key=spades_high)))
